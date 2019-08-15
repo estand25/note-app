@@ -3,6 +3,7 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 
 const db = require('./db')
+const noteRouter = require('./routes/note-router')
 
 const app = express()
 const apiPost = 3000
@@ -16,6 +17,8 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'))
 app.get('/', (req, res) => {
     res.send('Hello World!')
 })
+
+app.use('/api', noteRouter)
 
 app.listen(apiPost, () => console.log(`Server running on part ${apiPost}`))
 

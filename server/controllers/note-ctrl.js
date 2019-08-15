@@ -68,8 +68,68 @@ updateNote = async (req,res) => {
     })
 }
 
+deleteNote = async (req, res) => {
+    await Note.findOneAndDelete(
+        { _id: req.params.id }, (err, note) => {
+            if(err){
+                return res.status(400)
+                    .json({ success: false, error: err})
+            }
+
+            if(!note){
+                return res
+                    .status(404)
+                    .json({ success: false, error: `Note not found` })
+            }
+
+            return res.status(200)
+                .json({ success: true, data: note })
+        }).catch(err => console.log(err))
+}
+
+getNoteById = async (req,res) => {
+    await Note.findOne({ _id: req.params.id }, (err,note) => {
+        if(err){
+            return res.status(400)
+                .json({ success: false, error: err})
+        }
+
+        if(!note){
+            return res
+                .status(404)
+                .json({ success: false, error: `Note not found` })
+        }
+
+        return res.status(200)
+            .json({success: true, data: note})
+    }).catch(err => console.log(err))
+}
+
+
+getNote = async (req,res) => {
+    await Note.find({}, (err, notes) => {
+        if(err){
+            return res.status(400)
+                .json({ success: false, error: err})
+        }
+
+        if(!notes.length){
+            return res
+                .status(404)
+                .json({ success: false, error: `Note not found` })
+        }
+
+        return res
+            .status(200)
+            .json({ success: true, data: notes })
+    }).catch(err => console.log(err))
+}
+
 module.exports = {
     createNote,
-    updateNote
+    updateNote,
+    deleteNote,
+    getNoteById,
+    getNote
 }
 
