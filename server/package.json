@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "serve": "nodemon server.js"
+    "server": "nodemon server.js"
   },
   "keywords": [],
   "author": "Standley Eugene <standleyeugene20@hotmail.com>",
