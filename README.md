@@ -1,4 +1,4 @@
-# A note-app  second MERN app - 
+# My second MERN App - note-app 
 
 # Introduction
 
@@ -8,7 +8,7 @@ This repository is following the below tutorial to develop a MERN application an
 
 If your following the tutorial above it will walk you through creating a simple MERN movie application. As a part of my learning journey I have found its alway better to follow tutorials while doing and making changes. In my case i create a Note App that allows the users to create, update, and delete notes instead of movies.
 
-### Features
+### Future Features
 I plan on adding the following features to contiune the learning:
 
 - Will update the front-end components to use React-Hooks
