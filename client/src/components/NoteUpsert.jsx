@@ -56,13 +56,11 @@ const NoteUpsert = (props) => {
     )
 
     const handleChangeInputTitle = async event => {
-        const intitle = event.target.value
-        setTitleState(intitle)
+        setTitleState(event.target.value)
     }
 
     const handleChangeInputDesciption = async event => {
-        const indesciption = event.target.value
-        setDesciptionState(indesciption)
+        setDesciptionState(event.target.value)
     }
 
     const onClick = () => {
@@ -97,7 +95,7 @@ const NoteUpsert = (props) => {
                 />
             </Spacing>
 
-            <Button onClick={ onClick }>{props.btnAccept}</Button>
+            <Button onClick={ onClick } >{props.btnAccept}</Button>
             <CancelButton href={'/notes/list'}>Cancel</CancelButton>
         </Wrapper>
     )

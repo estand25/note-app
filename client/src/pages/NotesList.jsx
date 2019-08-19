@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import ReactTable from 'react-table'
 import api from '../api'
-import { DeleteNote, UpdateNote } from '../components'
+import { NoteDelete, NoteUpdate } from '../components'
 
 import styled from 'styled-components'
 
@@ -50,7 +50,7 @@ const NotesList = () => {
             Cell: function(props) {
                 return (
                     <span>
-                        <DeleteNote id={props.original._id} />
+                        <NoteDelete id={props.original._id} />
                     </span>
                 )
             }
@@ -61,7 +61,7 @@ const NotesList = () => {
             Cell: function(props) {
                 return (
                     <span>
-                        <UpdateNote id={props.original._id} />
+                        <NoteUpdate id={props.original._id} />
                     </span>
                 )
             }

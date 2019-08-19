@@ -8,7 +8,7 @@ const Delete = styled.div`
     cursor: pointer;
 `
 
-const DeleteNote = (props) => {
+const NoteDelete = (props) => {
     const deleteUser = event => {
         console.log(event);
         
@@ -27,4 +27,4 @@ const DeleteNote = (props) => {
     return <Delete onClick={deleteUser}>Delete</Delete>
 }
 
-export default DeleteNote
+export default NoteDelete

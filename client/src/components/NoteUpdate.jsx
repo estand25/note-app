@@ -6,7 +6,7 @@ const Update = styled.div`
     cursor: pointer;
 `
 
-const UpdateNote = (props) => {
+const NoteUpdate = (props) => {
     const updateUser = event => {
         console.log(event);
         
@@ -18,4 +18,4 @@ const UpdateNote = (props) => {
     return <Update onClick={updateUser}>Update</Update>
 }
 
-export default UpdateNote
+export default NoteUpdate

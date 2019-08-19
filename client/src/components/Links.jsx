@@ -24,7 +24,7 @@ const Links = () => {
                 <List>
                     <Item>
                         <Link to="/notes/list" className="nav-link">
-                            Note
+                            Notes
                         </Link>
                     </Item>
                     <Item>
@@ -32,8 +32,21 @@ const Links = () => {
                             Create Note
                         </Link>
                     </Item>
+                    <Item>
+                        <Link className="nav-link">
+                            Notes Management
+                        </Link>
+                    </Item>
+                    <Item>
+                        <Link to="/notes/about" className="nav-link">
+                            About
+                        </Link>
+                    </Item>
                 </List>
             </Collapse>
+            <Link className="nav-link">
+                Logging
+            </Link>
         </React.Fragment>
     )
 }

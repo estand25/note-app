@@ -12,9 +12,11 @@ function App() {
       <NavBar />
       <Switch>
         <Route path="/" exact component={NoteAppAbout} />
+        <Route path="/notes/about" exact component={NoteAppAbout} />
         <Route path="/notes/list" exact component={NotesList} />
         <Route path="/notes/create" exact component={NotesInsert} />
         <Route path="/notes/update/:id" exact component={NotesUpdate} />
+        
       </Switch>
     </Router>
   );

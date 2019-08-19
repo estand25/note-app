@@ -10,7 +10,7 @@ class NotesUpdate extends Component {
             id: this.props.match.params.id,
             title: '',
             desciption: '',
-            data: {},
+            data: '',
         }
     }
 
