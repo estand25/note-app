@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 
 import Logo from './Logo'
@@ -14,17 +14,16 @@ const Nav = styled.div.attrs({
     margin-bottom: 20 px;
 `
 
-class NavBar extends Component {
-    render() {
-        return (
-            <Container>
-                <Nav>
-                    <Logo />
-                    <Links />
-                </Nav>
-            </Container>
-        )
-    }
+const NavBar = () => {
+    return (
+        <Container>
+            <Nav>
+                <Logo />
+                <Links />
+            </Nav>
+        </Container>
+    )
+
 }
 
 export default NavBar

@@ -11,7 +11,7 @@ If your following the tutorial above it will walk you through creating a simple 
 ### Future Features
 I plan on adding the following features to contiune the learning:
 
-- Will update the front-end components to use React-Hooks
+- Will update the front-end components to use React-Hooks - Done
 - Will update the front-end to have sign-up, log-in and log-out
 - Will update the front-end to also have a note management page
 - Will update the back-end to add a user schema
