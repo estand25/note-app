@@ -17,17 +17,32 @@ createUser = (req, res) => {
             success: false,
             error: err
         })
-    }
+    }       
+        
+    User.findOne({username: req.body.username}, (err, user_) => {
+        if(err) {
+            console.log(err);
+        }
+        
+        if(user_) {
+            return res.json({
+                success: false,
+                message: "user exists"
+            });
 
-    user
-        .save()
-        .then(() => {
-            return res.status(201).json({
-                success: true,
-                id: user._id,
-                message: 'User Created!',
-            })
-        })
+        } else {
+            user
+                .save()
+                .then(() => {
+                    return res.status(201).json({
+                        success: true,
+                        id: user._id,
+                        message: 'User Created!',
+                    })
+                })
+        }
+
+    })
 }
 
 updateUser = (req, res) => {
