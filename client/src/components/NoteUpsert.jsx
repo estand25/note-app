@@ -69,7 +69,7 @@ const NoteUpsert = (props) => {
 
         const payload = {title,desciption}
 
-        props.onPayloadChange(payload)
+        props.onPayloadCreation(payload)
 
         setTitleState('')
         setDesciptionState('')

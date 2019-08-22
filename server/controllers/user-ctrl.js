@@ -144,9 +144,69 @@ getUserById = async (req,res) => {
     }).catch(err => console.log(err))
 }
 
+
+getUserByUsernameAndPassword = async (req, res) => {
+    const body = req.body
+
+    console.log(req.params.username);
+    console.log(req.params.password); 
+
+    if(!body){
+        return res.status(400).json({
+            success: false,
+            error: 'You must provide a body to'
+        })
+    }
+
+    User.findOne({username: req.body.username}, (err, _user) => {
+        if(err) {
+            return res.status(404).json({
+                err,
+                message: 'User Not found!',
+            })
+        }
+        
+        if(!_user){
+            return res
+                .status(404)
+                .json({
+                    success: false,
+                    error: 'User not found'
+                })
+        } else {
+            User.findOne({password: req.body.password}, (_err,_user_) => {
+                if(_err) {
+                    return res.status(404).json({
+                        _err,
+                        message: 'User Not found!',
+                    })
+                }
+
+                if(!user){
+                    return res
+                        .status(404)
+                        .json({
+                            success: false,
+                            error: 'User not found'
+                        })
+                }
+                
+                return res
+                    .status(200)
+                    .json({
+                        success: true,
+                        data: user
+                    })
+            })
+        }
+
+    })
+}
+
 module.exports = {
     createUser,
     updateUser,
     deleteUser,
-    getUserById
+    getUserById,
+    getUserByUsernameAndPassword
 }

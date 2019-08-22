@@ -38,7 +38,7 @@ class NotesInsert extends Component {
                 btnAccept={'Add Note'}
                 onTitleChange={this.handleChangeInputTitle}
                 onDescriptionChange={this.handleChangeInputDescription}
-                onPayloadChange={this.handleIncludeNote}
+                onPayloadCreation={this.handleIncludeNote}
             />
         )
     }

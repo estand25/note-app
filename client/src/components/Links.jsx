@@ -44,8 +44,14 @@ const Links = () => {
                     </Item>
                 </List>
             </Collapse>
-            <Link className="nav-link">
-                Logging
+            <Link to="/user/signUp" className="nav-link">
+                Sign-Up
+            </Link>
+            <Link to="/user/signIn" className="nav-link">
+                Sign-In
+            </Link>
+            <Link to="/user/userProfile" className="nav-link">
+                User Profile
             </Link>
         </React.Fragment>
     )

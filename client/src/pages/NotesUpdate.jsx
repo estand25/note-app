@@ -53,7 +53,7 @@ class NotesUpdate extends Component {
                 btnAccept={'Update Note'}
                 onTitleChange={this.handleChangeInputTitle}
                 onDescriptionChange={this.handleChangeInputDescription}
-                onPayloadChange={this.handleUpdateNote}
+                onPayloadCreation={this.handleUpdateNote}
             />
         )
     }
