@@ -9,6 +9,7 @@ import {
   NoteAppAbout,
   UserProfile,
   UserSignIn,
+  UserSignOut,
   UserSignUp
 } from '../pages'
 
@@ -25,6 +26,7 @@ const App = () => {
         <Route path="/notes/create" exact component={NotesInsert} />
         <Route path="/notes/update/:id" exact component={NotesUpdate} />
         <Route path="/user/signUp" exact component={UserSignUp} />
+        <Route path="/user/signOut" exact component={UserSignOut} />
         <Route path="/user/signIn" exact component={UserSignIn} />
         <Route path="/user/userProfile" exact component={UserProfile} />
       </Switch>

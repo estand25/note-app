@@ -52,15 +52,17 @@ const UserSign = (props) => {
     }
 
     const onClick = () => {
-        props.onUserNameChange(_userName)
-        props.onPasswordChange(password)
-
-        const payload = {_userName, password}
+        const payload = {
+            username: _userName, 
+            password: password
+        }
 
         props.onPayloadCreation(payload)
 
         setUserName('')
         setPassword('')
+
+        window.location.href = props.directTo
     }
 
     return (
@@ -77,7 +79,7 @@ const UserSign = (props) => {
             <Label>Password: </Label>
             <Spacing>
                 <InputText
-                    type="text"
+                    type="password"
                     value={password}
                     onChange={handleChangeInputPassword}
                 />

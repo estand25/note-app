@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react'
 
 import styled from 'styled-components'
 
+import { useAppState } from '../hooks'
+
 const Title = styled.h1.attrs({
     className: 'h1',
 })``
@@ -45,6 +47,7 @@ const Spacing = styled.div`
 const NoteUpsert = (props) => {
     const [title, setTitleState] = useState('')
     const [desciption, setDesciptionState] = useState('')
+    const { state } = useAppState()
 
     useEffect(
         () => {
@@ -64,15 +67,23 @@ const NoteUpsert = (props) => {
     }
 
     const onClick = () => {
+        console.log(state._id);
+        
         props.onTitleChange(title)
         props.onDescriptionChange(desciption)
 
-        const payload = {title,desciption}
+        const payload = {
+            title: title,
+            desciption :desciption,
+            user: state._id
+        }
 
         props.onPayloadCreation(payload)
 
         setTitleState('')
         setDesciptionState('')
+
+        window.location.href ='/notes/list'
     }
 
     return (

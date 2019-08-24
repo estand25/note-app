@@ -1,46 +1,33 @@
-import React, { Component } from 'react'
+import React from 'react'
 import api from '../api'
 import { UserSign } from '../components'
+import { useAppState } from '../hooks'
 
-class UserSignIn extends Component {
-    constructor(props){
-        super(props)
+const UserSignIn = () => {
 
-        this.state = {
-            username: '',
-            password: '',
-        }
-    }
+    const { actions } = useAppState()
 
-    handleChangeInputUsername = (_userName) => {
-        this.setState({
-            username: _userName
+    const handleCreateUser = async (payload) => {
+        // console.log(payload);
+        
+        await api.SignInUser(payload).then(res => {
+            console.log(res.data.data._id);
+            
+            actions.setId(res.data.data._id)
+            window.alert('User successfully Sign-In!!')
+        }).catch(err => {
+            window.alert(err)
         })
     }
 
-    handleChangeInputPassword = (password) => {
-        this.setState({
-            password: password
-        })
-    }
-
-    handleCreateUser = async (payload) => {
-        await api.insertUser(payload).then(res => {
-            window.alert('User created successfully !!')
-        })
-    }
-
-    render(){
-        return (
-            <UserSign
-                title={'Sign In'}
-                btnAccept={'Sign In'}
-                onUserNameChange={this.handleChangeInputUsername}
-                onPasswordChange={this.handleChangeInputPassword}
-                onPayloadCreation={this.handleCreateUser}
-            />
-        )
-    }
+    return (
+        <UserSign
+            title={'Sign In'}
+            btnAccept={'Sign In'}
+            onPayloadCreation={handleCreateUser}
+            directTo={'/notes/list'}
+        />
+    )
 }
 
 export default UserSignIn

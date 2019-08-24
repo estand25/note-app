@@ -22,12 +22,16 @@ createUser = (req, res) => {
     User.findOne({username: req.body.username}, (err, user_) => {
         if(err) {
             console.log(err);
+            return res.status(400).json({
+                success: false,
+                error: err
+            })
         }
         
         if(user_) {
             return res.json({
                 success: false,
-                message: "user exists"
+                error: "user exists"
             });
 
         } else {
@@ -58,8 +62,8 @@ updateUser = (req, res) => {
     User.findOne({_id: req.params.id}, (err,user) => {
         if(err) {
             return res.status(404).json({
-                err,
-                message: 'User Not found!',
+                success: false,
+                error: err,
             })
         }
 
@@ -79,8 +83,8 @@ updateUser = (req, res) => {
             })
             .catch( error => {
                 return res.status(404).json({
-                    error,
-                    message: 'User note Updated!'
+                    success: false,
+                    error: error,
                 })
             })
     })
@@ -144,25 +148,25 @@ getUserById = async (req,res) => {
     }).catch(err => console.log(err))
 }
 
-
-getUserByUsernameAndPassword = async (req, res) => {
+userSignIn = async (req, res) => {
     const body = req.body
+    
+    // console.log(body.username);
+    // console.log(body.password); 
 
-    console.log(req.params.username);
-    console.log(req.params.password); 
-
-    if(!body){
+    if(!body.username && 
+        !body.password){
         return res.status(400).json({
             success: false,
-            error: 'You must provide a body to'
+            error: 'You must provide a username or/and password'
         })
     }
 
-    User.findOne({username: req.body.username}, (err, _user) => {
+    User.findOne({username: body.username}, (err, _user) => {
         if(err) {
             return res.status(404).json({
-                err,
-                message: 'User Not found!',
+                success: false,
+                error: err,
             })
         }
         
@@ -174,15 +178,15 @@ getUserByUsernameAndPassword = async (req, res) => {
                     error: 'User not found'
                 })
         } else {
-            User.findOne({password: req.body.password}, (_err,_user_) => {
+            User.findOne({password: body.password}, (_err,_user_) => {
                 if(_err) {
                     return res.status(404).json({
-                        _err,
-                        message: 'User Not found!',
+                        success: false,
+                        error: _err,
                     })
                 }
 
-                if(!user){
+                if(!_user_){
                     return res
                         .status(404)
                         .json({
@@ -191,15 +195,120 @@ getUserByUsernameAndPassword = async (req, res) => {
                         })
                 }
                 
-                return res
-                    .status(200)
-                    .json({
-                        success: true,
-                        data: user
+                if(_user_.status == "1"){
+                    return res
+                        .status(404)
+                        .json({
+                            success: false,
+                            error: 'User is already Logged-In'
+                        })
+                }
+
+                _user_.username = body.username
+                _user_.password = body.password
+                _user_.status = "1"
+        
+                _user_   
+                    .save()
+                    .then(() => {
+                        return res
+                            .status(200)
+                            .json({
+                                success: true,
+                                data: _user_
+                            })
                     })
+                    .catch( error => {
+                        return res.status(404).json({
+                            success: false,
+                            error: error
+                        })
+                    })
+
             })
         }
+    })
+}
 
+userSignOut = async (req, res) => {
+    const body = req.body
+    
+    // console.log(body.username);
+    // console.log(body.password); 
+
+    if(!body.username && 
+        !body.password){
+        return res.status(400).json({
+            success: false,
+            error: 'You must provide a username or/and password'
+        })
+    }
+
+    User.findOne({username: body.username}, (err, _user) => {
+        if(err) {
+            return res.status(404).json({
+                success: false,
+                error: err,
+            })
+        }
+        
+        if(!_user){
+            return res
+                .status(404)
+                .json({
+                    success: false,
+                    error: 'User not found'
+                })
+        } else {
+            User.findOne({password: body.password}, (_err,_user_) => {
+                if(_err) {
+                    return res.status(404).json({
+                        success: false,
+                        error: _err,
+                    })
+                }
+
+                if(!_user_){
+                    return res
+                        .status(404)
+                        .json({
+                            success: false,
+                            error: 'User not found'
+                        })
+                }
+                
+                if(_user_.status == "0"){
+                    return res
+                        .status(400)
+                        .json({
+                            success: false,
+                            error: 'User is not Logged-In'
+                        })
+                }
+
+                _user_.username = body.username
+                _user_.password = body.password
+                _user_.status = "0"
+        
+                _user_   
+                    .save()
+                    .then(() => {
+                        return res
+                            .status(200)
+                            .json({
+                                success: true,
+                                data: _user_
+                            })
+                    })
+                    .catch( error => {
+                        return res.status(404).json({
+                            success: false,
+                            error: error
+                        })
+                    })
+
+            })
+        }
     })
 }
 
@@ -208,5 +317,6 @@ module.exports = {
     updateUser,
     deleteUser,
     getUserById,
-    getUserByUsernameAndPassword
+    userSignIn,
+    userSignOut
 }

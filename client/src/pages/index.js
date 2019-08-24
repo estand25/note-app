@@ -4,6 +4,7 @@ import NotesUpdate from './NotesUpdate'
 import NoteAppAbout from './NoteAppAbout'
 import UserProfile from './UserProfile'
 import UserSignIn from './UserSignIn'
+import UserSignOut from './UserSignOut'
 import UserSignUp from './UserSignUp'
 
 export {
@@ -13,5 +14,6 @@ export {
     NoteAppAbout,
     UserProfile,
     UserSignIn,
+    UserSignOut,
     UserSignUp
 }
