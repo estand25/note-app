@@ -25,7 +25,8 @@ const UserSignIn = () => {
             title={'Sign In'}
             btnAccept={'Sign In'}
             onPayloadCreation={handleCreateUser}
-            directTo={'/notes/list'}
+            onDirectTo={'/notes/list'}
+            onLogInInfo={'1'}
         />
     )
 }

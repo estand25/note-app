@@ -1,15 +1,8 @@
-import React, { Component } from 'react'
+import React from 'react'
 import api from '../api'
 import { UserSign } from '../components'
-import styled from 'styled-components'
 
-const Button = styled.button.attrs({
-    className: 'btn btn-primary',
-})`
-    margin: 15px 15px 15px 5px;
-` 
-
-class UserSignOut extends Component {
+const UserSignOut = () => {
     // constructor(props){
     //     super(props)
 
@@ -31,7 +24,7 @@ class UserSignOut extends Component {
     //     })
     // }
 
-    handleSignOutUser = async (payload) => {
+    const handleSignOutUser = async (payload) => {
         await api.SignOutUser(payload).then(res => {
             console.log(res.user);
             window.alert('User successfully Sign-out!!')
@@ -40,20 +33,17 @@ class UserSignOut extends Component {
         })
     }
 
-    render(){
+    // render(){
         return (
-            // <div>
-            //     <Button onClick={handleSignOutUser}>Sign-out</Button>
-            // </div>
             <UserSign
                 title={'Sign Out'}
                 btnAccept={'Sign Out'}
-                // onUserNameChange={this.handleChangeInputUsername}
-                // onPasswordChange={this.handleChangeInputPassword}
-                onPayloadCreation={this.handleCreateUser}
+                onPayloadCreation={handleSignOutUser}
+                onDirectTo={'/notes/list'}
+                onLogInInfo={''}
             />
         )
-    }
+    // }
 }
 
 export default UserSignOut
