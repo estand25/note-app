@@ -1,11 +1,13 @@
 import React from 'react'
 import api from '../api'
 import { UserSign } from '../components'
-import { useAppState } from '../hooks'
+// import { useAppState } from '../hooks'
+import { UserContext } from '../hooks/UserContext'
 
 const UserSignIn = () => {
 
-    const { actions } = useAppState()
+    // const { actions } = useAppState()
+    const [state, setState] = React.useContext(UserContext)
 
     const handleCreateUser = async (payload) => {
         // console.log(payload);
@@ -13,8 +15,16 @@ const UserSignIn = () => {
         await api.SignInUser(payload).then(res => {
             console.log(res.data.data._id);
             
-            actions.setId(res.data.data._id)
+            // () => {
+            //     dispatch({type:"set-user", payload: res.data.data._id})
+            // }
+            // actions.setId(res.data.data._id)
+            setState(res.data.data._id)
             window.alert('User successfully Sign-In!!')
+
+            // console.log(state);
+            window.alert(state)
+            
         }).catch(err => {
             window.alert(err)
         })

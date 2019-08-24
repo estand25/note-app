@@ -24,12 +24,19 @@ const UserSignOut = () => {
     //     })
     // }
 
-    const handleSignOutUser = async (payload) => {
-        await api.SignOutUser(payload).then(res => {
-            console.log(res.user);
-            window.alert('User successfully Sign-out!!')
-        }).catch(err => {
-            window.alert(err.error)
+    // const handleSignOutUser = async (payload) => {
+    //     await api.SignOutUser(payload).then(res => {
+    //         // console.log(res.user);
+    //         window.alert('User successfully Sign-out!!')
+    //     }).catch(err => {
+    //         window.alert(err.error)
+    //     })
+    // }
+
+    const handleSignOutUserWithId = async (_id) => {
+        await api.getUserById(_id).then(res => {
+            console.log(res);
+            window.alert('User Successfully Sign-out!!')
         })
     }
 
@@ -38,7 +45,8 @@ const UserSignOut = () => {
             <UserSign
                 title={'Sign Out'}
                 btnAccept={'Sign Out'}
-                onPayloadCreation={handleSignOutUser}
+                // onPayloadCreation={handleSignOutUser}
+                onPayloadUser={handleSignOutUserWithId}
                 onDirectTo={'/notes/list'}
                 onLogInInfo={''}
             />

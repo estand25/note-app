@@ -1,7 +1,12 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-
-import { NavBar } from '../components'
+import { 
+  NavBar 
+} from '../components'
+import { 
+  BrowserRouter as Router, 
+  Route, 
+  Switch 
+} from 'react-router-dom'
 import { 
   NotesList, 
   NotesInsert, 
@@ -15,20 +20,30 @@ import {
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 
+// import {
+//   UserProvider
+// } from '../hooks/UserContext'
+
+// const user = {_id: 'x'}
+
 const App = () => {
   return (
     <Router>
-      <NavBar />
-      <Switch>
-        <Route path="/" exact component={NoteAppAbout} />
-        <Route path="/notes/about" exact component={NoteAppAbout} />
-        <Route path="/notes/list" exact component={NotesList} />
-        <Route path="/notes/create" exact component={NotesInsert} />
-        <Route path="/notes/update/:id" exact component={NotesUpdate} />
-        <Route path="/user/signUp" exact component={UserSignUp} />
-        <Route path="/user/signOut" exact component={UserSignOut} />
-        <Route path="/user/signIn" exact component={UserSignIn} />
-        <Route path="/user/userProfile" exact component={UserProfile} />
+      {/* <UserProvider> */}
+        <NavBar />
+      {/* </UserProvider> */}
+        <Switch>
+          {/* <UserProvider> */}
+          <Route path="/" exact component={NoteAppAbout} />
+          <Route path="/notes/about" exact component={NoteAppAbout} />
+          <Route path="/notes/list" exact component={NotesList} />
+          <Route path="/notes/create" exact component={NotesInsert} />
+          <Route path="/notes/update/:id" exact component={NotesUpdate} />
+          <Route path="/user/signUp" exact component={UserSignUp} />
+          <Route path="/user/signOut" exact component={UserSignOut} />
+          <Route path="/user/signIn" exact component={UserSignIn} />
+          <Route path="/user/userProfile" exact component={UserProfile} />
+        {/* </UserProvider> */}
       </Switch>
     </Router>
   );
