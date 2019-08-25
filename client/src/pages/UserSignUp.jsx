@@ -89,7 +89,7 @@ class UserSignUp extends Component {
         return (
             <Wrapper>
             <Title>Sign-Up</Title>
-            <Label>UserName: </Label>
+            <Label>User Name: </Label>
             <Spacing>
                 <InputText
                     type="text"

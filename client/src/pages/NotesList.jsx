@@ -25,7 +25,7 @@ const NotesList = () => {
             })
         },[]
     )
-
+    
     console.log('TCL: NotesList -> render -> notes', notes)
 
     const columns = [

@@ -20,20 +20,11 @@ import {
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-// import {
-//   UserProvider
-// } from '../hooks/UserContext'
-
-// const user = {_id: 'x'}
-
 const App = () => {
-  return (
+  return (      
     <Router>
-      {/* <UserProvider> */}
-        <NavBar />
-      {/* </UserProvider> */}
+      <NavBar />
         <Switch>
-          {/* <UserProvider> */}
           <Route path="/" exact component={NoteAppAbout} />
           <Route path="/notes/about" exact component={NoteAppAbout} />
           <Route path="/notes/list" exact component={NotesList} />
@@ -43,7 +34,6 @@ const App = () => {
           <Route path="/user/signOut" exact component={UserSignOut} />
           <Route path="/user/signIn" exact component={UserSignIn} />
           <Route path="/user/userProfile" exact component={UserProfile} />
-        {/* </UserProvider> */}
       </Switch>
     </Router>
   );

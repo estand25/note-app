@@ -1,6 +1,4 @@
 import React, { useState } from 'react'
-// import { useAppState } from '../hooks'
-import { UserContext } from '../hooks/UserContext'
 
 import styled from 'styled-components'
 
@@ -48,7 +46,7 @@ const LogInInfo = (props) => {
         return (
             <Holder>
                 <Title>{props.title}</Title>
-                <Label>UserName: </Label>
+                <Label>User Name: </Label>
                 <Spacing>
                     <InputText
                         type="text"
@@ -74,8 +72,6 @@ const LogInInfo = (props) => {
 }
 
 const UserSign = (props) => {
-    // const { state } = useAppState()
-    const { state } = React.useContext(UserContext)
     const [_userName, setUserName] = useState('')
     const [password, setPassword] = useState('')
 
@@ -98,7 +94,7 @@ const UserSign = (props) => {
 
             props.onPayloadCreation(payload)
         } else {
-            props.onPayloadUser(state._id)
+            props.onPayloadUser('')
         }
 
         setUserName('')
