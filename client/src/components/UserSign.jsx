@@ -1,26 +1,12 @@
 import React, { useState } from 'react'
-
+import UserLogIn from './UserLogIn'
 import styled from 'styled-components'
-
-const Title = styled.h1.attrs({
-    className: 'h1',
-})``
 
 const Wrapper = styled.div.attrs({
     className: 'form-group',
 })`
     margin: 0 30px;
     border: 1px;
-`
-
-const Label = styled.label`
-    margin: 5px;
-`
-
-const InputText = styled.input.attrs({
-    className: 'form-control',
-})`
-    margin: 5px;
 `
 
 const Button = styled.button.attrs({
@@ -35,34 +21,12 @@ const CancelButton = styled.a.attrs({
     margin 15px 15px 15px 5px;
 `
 
-const Spacing = styled.div`
-    padding: 5px;
-`
-
 const Holder = styled.div``
 
 const LogInInfo = (props) => {
     if(props.onFieldShowLogIn === '1') {
         return (
-            <Holder>
-                <Title>{props.title}</Title>
-                <Label>User Name: </Label>
-                <Spacing>
-                    <InputText
-                        type="text"
-                        value={props.usename}
-                        onChange={props.onUsernameFun}
-                    />
-                </Spacing>
-                <Label>Password: </Label>
-                <Spacing>
-                    <InputText
-                        type="password"
-                        value={props.password}
-                        onChange={props.onPasswordFun}
-                    />
-                </Spacing>
-            </Holder>
+            <UserLogIn />
         )
     } else {
         return (
@@ -114,7 +78,7 @@ const UserSign = (props) => {
                 onFieldShowLogIn={props.onLogInInfo}
             />
             <Button onClick={onClick}>{props.btnAccept}</Button>
-            <CancelButton href={'/notes/about'}>Cancel</CancelButton>
+            <CancelButton href={props.onCancelDirectTo}>Cancel</CancelButton>
         </Wrapper>
     )
 }

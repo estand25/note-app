@@ -5,5 +5,6 @@ import NoteDelete from './NoteDelete'
 import NoteUpdate from './NoteUpdate'
 import NoteUpsert from './NoteUpsert'
 import UserSign from './UserSign'
+import UserSignUpProfile from './UserSignUpProfile'
 
-export { Links, Logo, NavBar, NoteDelete, NoteUpdate, NoteUpsert, UserSign }
+export { Links, Logo, NavBar, NoteDelete, NoteUpdate, NoteUpsert, UserSign, UserSignUpProfile }

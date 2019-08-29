@@ -20,6 +20,7 @@ const UserSignIn = () => {
             btnAccept={'Sign-In'}
             onPayloadCreation={handleCreateUser}
             onDirectTo={'/notes/list'}
+            onCancelDirectTo={'/notes/about'}
             onLogInInfo={'1'}
         />
     )

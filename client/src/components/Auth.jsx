@@ -2,6 +2,19 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { UserConsumer } from '../hooks/UserContext'
 
+const Auth = () => (
+    <UserConsumer>
+        {({ username }) => (
+            <div>      
+                <Link to="/user/userProfile" className="nav-link">{username}</Link>
+                <Link to="/user/signOut" className="nav-link">Sign-Out</Link>
+            </div>
+        )}
+    </UserConsumer>
+)
+
+export default Auth
+
 // const SignInUp = (props) => {
 //     return (
 //         <div>
@@ -54,16 +67,3 @@ import { UserConsumer } from '../hooks/UserContext'
 //         )}
 //     </UserConsumer>
 // )
-
-const Auth = () => (
-    
-    <UserConsumer>
-        {({ username }) => (
-            <div>      
-                <Link to="/user/userProfile">{username}</Link>
-            </div>
-        )}
-    </UserConsumer>
-)
-
-export default Auth

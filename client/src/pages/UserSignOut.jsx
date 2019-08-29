@@ -3,36 +3,6 @@ import api from '../api'
 import { UserSign } from '../components'
 
 const UserSignOut = () => {
-    // constructor(props){
-    //     super(props)
-
-    //     this.state = {
-    //         username: '',
-    //         password: '',
-    //     }
-    // }
-
-    // handleChangeInputUsername = (_userName) => {
-    //     this.setState({
-    //         username: _userName
-    //     })
-    // }
-
-    // handleChangeInputPassword = (password) => {
-    //     this.setState({
-    //         password: password
-    //     })
-    // }
-
-    // const handleSignOutUser = async (payload) => {
-    //     await api.SignOutUser(payload).then(res => {
-    //         // console.log(res.user);
-    //         window.alert('User successfully Sign-out!!')
-    //     }).catch(err => {
-    //         window.alert(err.error)
-    //     })
-    // }
-
     const handleSignOutUserWithId = async (_id) => {
         await api.getUserById(_id).then(res => {
             console.log(res);
@@ -40,18 +10,15 @@ const UserSignOut = () => {
         })
     }
 
-    // render(){
-        return (
-            <UserSign
-                title={'Sign Out'}
-                btnAccept={'Sign Out'}
-                // onPayloadCreation={handleSignOutUser}
-                onPayloadUser={handleSignOutUserWithId}
-                onDirectTo={'/notes/list'}
-                onLogInInfo={''}
-            />
-        )
-    // }
+    return (
+        <UserSign
+            title={'Sign Out'}
+            btnAccept={'Sign Out'}
+            onPayloadUser={handleSignOutUserWithId}
+            onDirectTo={'/notes/list'}
+            onCancelDirectTo={'/notes/about'}
+        />
+    )
 }
 
 export default UserSignOut
