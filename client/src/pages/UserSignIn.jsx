@@ -8,9 +8,8 @@ const UserSignInInner = (props) => {
         console.log('UserSignIn');
         console.log(payload);
         
-        
         await api.SignInUser(payload).then(res => {
-            console.log(res.data.data._id);
+            console.log(res);
             
             window.alert('User successfully Sign-In!!')
             
@@ -18,6 +17,8 @@ const UserSignInInner = (props) => {
             window.alert(err.error)
         })
 
+        // debugger
+        
         props.updateAccount(payload)
     }
 

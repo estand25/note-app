@@ -17,6 +17,8 @@ class Auth extends React.Component {
 }
 
 const AuthInfo = (props) => {
+    console.log(props);
+    
     if(props.username !== ''){
         return (
             <div>

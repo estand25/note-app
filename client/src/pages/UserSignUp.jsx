@@ -1,12 +1,17 @@
 import React from 'react'
 import api from '../api'
 import {  UserSignUpProfile } from '../components'
+import { UserConsumer } from '../hooks/UserContext'
 
-const UserSignUp = () => {
+const UserSignUpInner = (props) => {
     const handleCreateUser = async (payload) => {
         await api.insertUser(payload).then(res => {
+            console.log(res);
+            
             window.alert('User created successfully !!')
         })
+
+        props.updateAccount(payload)
     }
 
     return (
@@ -20,6 +25,21 @@ const UserSignUp = () => {
         />
     )
 }
+
+const UserSignUp = props => (
+    <UserConsumer>
+        {({username, password, email, _id, updateAccount}) => (
+            <UserSignUpInner
+                {...props}
+                username={username}
+                password={password}
+                email={email}
+                _id={_id}
+                updateAccount={updateAccount}
+            />
+        )}
+    </UserConsumer>
+)
 
 export default UserSignUp
 

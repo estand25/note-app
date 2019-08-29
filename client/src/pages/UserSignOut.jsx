@@ -1,11 +1,13 @@
 import React from 'react'
 import api from '../api'
 import { UserSign } from '../components'
+import { UserConsumer } from '../hooks/UserContext'
 
-const UserSignOut = () => {
+const UserSignOutInner = (props) => {
     const handleSignOutUserWithId = async (_id) => {
         await api.getUserById(_id).then(res => {
             console.log(res);
+            
             window.alert('User Successfully Sign-out!!')
         })
     }
@@ -21,6 +23,21 @@ const UserSignOut = () => {
         />
     )
 }
+
+const UserSignOut = props => (
+    <UserConsumer>
+        {({username, password, email, _id, updateAccount}) => (
+            <UserSignOutInner
+                {...props}
+                username={username}
+                password={password}
+                email={email}
+                _id={_id}
+                updateAccount={updateAccount}
+            />
+        )}
+    </UserConsumer>
+)
 
 export default UserSignOut
 
