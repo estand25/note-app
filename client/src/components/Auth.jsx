@@ -2,16 +2,37 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { UserConsumer } from '../hooks/UserContext'
 
-const Auth = () => (
-    <UserConsumer>
-        {({ username }) => (
-            <div>      
-                <Link to="/user/userProfile" className="nav-link">{username}</Link>
+class Auth extends React.Component {
+    render() {
+        return (
+            <UserConsumer>
+                {({ username }) => (
+                    <AuthInfo
+                        username={username}
+                    />
+                )}
+            </UserConsumer>
+        )
+    }
+}
+
+const AuthInfo = (props) => {
+    if(props.username !== ''){
+        return (
+            <div>
+                <Link to="/user/userProfile" className="nav-link">{props.username}</Link>
                 <Link to="/user/signOut" className="nav-link">Sign-Out</Link>
             </div>
-        )}
-    </UserConsumer>
-)
+        )
+    } else {
+        return (
+            <div>
+                <Link to="/user/signUp" className="nav-link">Sign-Up</Link>
+                <Link to="/user/signIn" className="nav-link">Sign-In</Link>
+            </div>
+        )
+    }
+}
 
 export default Auth
 
@@ -45,15 +66,15 @@ export default Auth
 // }
 
 // const Auth = () => {    
-//     // if(typeof state._id !== 'undefined'){
+//     if(typeof state._id !== 'undefined'){
 //         return (
 //             <SignInUp />
 //         )
-//     // } else {
-//     //     return (
-//     //         <SignOutProfile />
-//     //     )
-//     // }
+//     } else {
+//         return (
+//             <SignOutProfile />
+//         )
+//     }
 // }
 
 // const Auth = (_props) => (

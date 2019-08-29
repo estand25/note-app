@@ -3,32 +3,43 @@ import {  UserSignUpProfile } from '../components'
 import { UserConsumer } from '../hooks/UserContext'
 import apis from '../api';
 
-const UserProfile = () => {
+const UserProfileInner = (props) => {
     const handleUpdateUser = async (id, payload) => {
         await apis.updateUserById(id, payload).then(res => {
             window.alert('User Information Updated Successfully !!')
         })
+
+        props.updateAccount(payload)
     } 
 
     return (
-        <UserConsumer>
-            {({username, password, email, _id}) => (
-                <UserSignUpProfile
-                    title={'User Profile'}
-                    btnAccept={'Update Profile'}
-                    onDirectTo={'/notes/list'}
-                    onCancelDirectTo={'/notes/about'}
-                    onPayloadUpdate={handleUpdateUser}
-                    username={username}
-                    password={password}
-                    email={email}
-                    _id={_id}
-                />
-            )}
-        </UserConsumer>
+        <UserSignUpProfile
+            title={'User Profile'}
+            btnAccept={'Update Profile'}
+            onDirectTo={'/notes/list'}
+            onCancelDirectTo={'/notes/about'}
+            onPayloadUpdate={handleUpdateUser}
+            username={props.username}
+            password={props.password}
+            email={props.email}
+            _id={props._id}
+        />
     )
 }
 
-export default UserProfile
 
-//medium.com/flatiron-labs/how-to-use-the-react-context-api-70a76d3974d5
+const UserProfile = props => (
+    <UserConsumer>
+        {({username, password, email, _id, updateAccount}) => (
+            <UserProfileInner
+                {...props}
+                username={username}
+                password={password}
+                email={email}
+                _id={_id}
+                updateAccount={updateAccount}
+            />
+        )}
+    </UserConsumer>
+)
+export default UserProfile

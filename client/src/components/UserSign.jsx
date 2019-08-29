@@ -26,7 +26,12 @@ const Holder = styled.div``
 const LogInInfo = (props) => {
     if(props.onFieldShowLogIn === '1') {
         return (
-            <UserLogIn />
+            <UserLogIn 
+                username={props.username}
+                onUsernameFun={props.onUsernameFun}
+                password={props.password}
+                onPasswordFun={props.onPasswordFun}
+            />
         )
     } else {
         return (
@@ -49,7 +54,9 @@ const UserSign = (props) => {
 
     const onClick = () => {
         if(props.onLogInInfo === '1') {
-
+            console.log(_userName);
+            console.log(password);            
+            
             const payload = {
                 username: _userName, 
                 password: password

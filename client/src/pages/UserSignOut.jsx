@@ -17,6 +17,7 @@ const UserSignOut = () => {
             onPayloadUser={handleSignOutUserWithId}
             onDirectTo={'/notes/list'}
             onCancelDirectTo={'/notes/about'}
+            onLogInInfo={'0'}
         />
     )
 }

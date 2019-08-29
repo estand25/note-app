@@ -1,17 +1,24 @@
 import React from 'react'
 import api from '../api'
 import { UserSign } from '../components'
+import { UserConsumer } from '../hooks/UserContext'
 
-const UserSignIn = () => {
+const UserSignInInner = (props) => {
     const handleCreateUser = async (payload) => {
+        console.log('UserSignIn');
+        console.log(payload);
+        
+        
         await api.SignInUser(payload).then(res => {
             console.log(res.data.data._id);
             
             window.alert('User successfully Sign-In!!')
             
         }).catch(err => {
-            window.alert(err)
+            window.alert(err.error)
         })
+
+        props.updateAccount(payload)
     }
 
     return (
@@ -25,6 +32,21 @@ const UserSignIn = () => {
         />
     )
 }
+
+const UserSignIn = props => (
+    <UserConsumer>
+        {({username, password, email, _id, updateAccount}) => (
+            <UserSignInInner
+                {...props}
+                username={username}
+                password={password}
+                email={email}
+                _id={_id}
+                updateAccount={updateAccount}
+            />
+        )}    
+    </UserConsumer>
+)
 
 export default UserSignIn
 
