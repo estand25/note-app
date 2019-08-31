@@ -4,32 +4,25 @@ import { UserSign } from '../components'
 import { UserConsumer } from '../hooks/UserContext'
 
 const UserSignInInner = (props) => {
-    const handleCreateUser = async (payload) => {
-        // console.log('UserSignIn');
-        // console.log(payload);
-        
+    const handleCreateUser = async (payload) => {                
         await api.SignInUser(payload).then(res => {
-            // console.log(res.data);
-            // console.log(res.data.success);
-
             if(res.data.success === true){
                 var user = res.data.data;
                 console.log(user);
                 
-                const updateUser = {
+                const updateUserStorage = {
+                    _id: user._id,
                     username: user.username,
                     password: user.password,
-                    _id: user._id,
                     email: user.email
                 }
 
-                props.updateAccount(updateUser)
+                props.updateAccount(updateUserStorage)
+                window.alert('User successfully Sign-In!!')
             }
             
-            
-            window.alert('User successfully Sign-In!!')
-            
         }).catch(err => {
+            console.log(err);
             window.alert(err.error)
         })
     }
@@ -48,14 +41,14 @@ const UserSignInInner = (props) => {
 
 const UserSignIn = props => (
     <UserConsumer>
-        {({data, handleChagne}) => (
+        {({data, handleChange}) => (
             <UserSignInInner
                 {...props}
                 username={data.username}
                 password={data.password}
                 email={data.email}
                 _id={data._id}
-                updateAccount={handleChagne}
+                updateAccount={handleChange}
             />
         )}    
     </UserConsumer>

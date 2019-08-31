@@ -40,8 +40,7 @@ createUser = (req, res) => {
                 .then(() => {
                     return res.status(201).json({
                         success: true,
-                        id: user._id,
-                        message: 'User Created!',
+                        data: user,
                     })
                 })
         }
@@ -77,8 +76,7 @@ updateUser = (req, res) => {
             .then(() => {
                 return res.status(200).json({
                     success: true,
-                    id: user._id,
-                    message: 'User Update!',
+                    data: user,
                 })
             })
             .catch( error => {
@@ -150,9 +148,6 @@ getUserById = async (req,res) => {
 
 userSignIn = async (req, res) => {
     const body = req.body
-    
-    // console.log(body.username);
-    // console.log(body.password); 
 
     if(!body.username && 
         !body.password){
@@ -232,9 +227,6 @@ userSignIn = async (req, res) => {
 
 userSignOut = async (req, res) => {
     const body = req.body
-    
-    // console.log(body.username);
-    // console.log(body.password); 
 
     if(!body.username && 
         !body.password){

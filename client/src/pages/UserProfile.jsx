@@ -5,41 +5,48 @@ import apis from '../api';
 
 const UserProfileInner = (props) => {
     const handleUpdateUser = async (id, payload) => {
-        props.updateAccount(payload)
-        
         await apis.updateUserById(id, payload).then(res => {
-            console.log(res);
+            if(res.data.success === true){
+                var user = res.data.data;                
+                const updateUserStorage = {
+                    _id: user._id,
+                    username: user.username,
+                    password: user.password,
+                    email: user.email
+                }
+
+                props.updateAccount(updateUserStorage)
             
-            window.alert('User Information Updated Successfully !!')
+                window.alert('User Information Updated Successfully !!')
+            }
+        }).catch(err => {
+            console.log(err);
+            window.alert(err.error)
         })
     } 
 
     return (
         <UserSignUpProfile
+            {...props}
             title={'User Profile'}
             btnAccept={'Update Profile'}
             onDirectTo={'/notes/list'}
             onCancelDirectTo={'/notes/about'}
             onPayloadUpdate={handleUpdateUser}
-            username={props.username}
-            password={props.password}
-            email={props.email}
-            _id={props._id}
         />
     )
 }
 
-
 const UserProfile = props => (
     <UserConsumer>
-        {({username, password, email, _id, updateAccount}) => (
+        {({data, handleChange}) => (
             <UserProfileInner
                 {...props}
-                username={username}
-                password={password}
-                email={email}
-                _id={_id}
-                updateAccount={updateAccount}
+                username={data.username}
+                password={data.password}
+                email={data.email}
+                _id={data._id}
+                updateAccount={handleChange}
             />
         )}
     </UserConsumer>

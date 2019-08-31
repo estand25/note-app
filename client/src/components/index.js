@@ -7,4 +7,13 @@ import NoteUpsert from './NoteUpsert'
 import UserSign from './UserSign'
 import UserSignUpProfile from './UserSignUpProfile'
 
-export { Links, Logo, NavBar, NoteDelete, NoteUpdate, NoteUpsert, UserSign, UserSignUpProfile }
+export { 
+    Links, 
+    Logo, 
+    NavBar, 
+    NoteDelete, 
+    NoteUpdate, 
+    NoteUpsert, 
+    UserSign, 
+    UserSignUpProfile 
+}

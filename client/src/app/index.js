@@ -1,12 +1,15 @@
 import React from 'react';
+
 import { 
   NavBar 
 } from '../components'
+
 import { 
   BrowserRouter as Router, 
   Route, 
   Switch 
 } from 'react-router-dom'
+
 import { 
   NotesList, 
   NotesInsert, 

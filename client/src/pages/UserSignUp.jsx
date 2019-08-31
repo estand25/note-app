@@ -6,17 +6,28 @@ import { UserConsumer } from '../hooks/UserContext'
 const UserSignUpInner = (props) => {
 
     const handleCreateUser = async (payload) => {
-        props.updateAccount(payload)
-        
         await api.insertUser(payload).then(res => {
-            console.log(res);
-            
-            window.alert('User created successfully !!')
-        })
+            if(res.data.success === true){
+                var user = res.data.data;  
+
+                const updateUserStorage = {
+                    _id: user._id,
+                    username: user.username,
+                    password: user.password,
+                    email: user.email
+                }
+                
+                props.updateAccount(updateUserStorage)
+                window.alert('User created successfully !!')
+            }
+        }).catch(err => 
+            console.log(err)       
+        )
     }
 
     return (
         <UserSignUpProfile
+            {...props}
             title={'Sign-Up'}
             btnAccept={'Sign-Up'}
             onDirectTo={'/notes/list'}
@@ -29,14 +40,14 @@ const UserSignUpInner = (props) => {
 
 const UserSignUp = props => (
     <UserConsumer>
-        {({username, password, email, _id, updateAccount}) => (
+        {({ data, handleChange}) => (
             <UserSignUpInner
                 {...props}
-                username={username}
-                password={password}
-                email={email}
-                _id={_id}
-                updateAccount={updateAccount}
+                username={data.username}
+                password={data.password}
+                email={data.email}
+                _id={data._id}
+                updateAccount={handleChange}
             />
         )}
     </UserConsumer>

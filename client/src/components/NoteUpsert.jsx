@@ -1,8 +1,7 @@
 import React, {useState, useEffect} from 'react'
 
 import styled from 'styled-components'
-
-import { useAppState } from '../hooks'
+import { UserConsumer } from '../hooks/UserContext'
 
 const Title = styled.h1.attrs({
     className: 'h1',
@@ -44,10 +43,9 @@ const Spacing = styled.div`
  * NoteUpsert - Add new note if note does not exist 
  *      or Update note is exist
  */
-const NoteUpsert = (props) => {
+const NoteUpsertInner = (props) => {
     const [title, setTitleState] = useState('')
     const [desciption, setDesciptionState] = useState('')
-    const { state } = useAppState()
 
     useEffect(
         () => {
@@ -66,16 +64,14 @@ const NoteUpsert = (props) => {
         setDesciptionState(event.target.value)
     }
 
-    const onClick = () => {
-        console.log(state._id);
-        
+    const onClick = () => {        
         props.onTitleChange(title)
         props.onDescriptionChange(desciption)
 
         const payload = {
             title: title,
             desciption :desciption,
-            user: state._id
+            user: props._id
         }
 
         props.onPayloadCreation(payload)
@@ -111,5 +107,19 @@ const NoteUpsert = (props) => {
         </Wrapper>
     )
 }
+
+const NoteUpsert = props => (
+    <UserConsumer>
+        {({ data }) => (
+            <NoteUpsertInner
+                {...props}
+                username={data.username}
+                password={data.password}
+                email={data.email}
+                _id={data._id}
+            />
+        )}
+    </UserConsumer>
+)
 
 export default NoteUpsert;

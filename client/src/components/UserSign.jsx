@@ -53,24 +53,16 @@ const UserSign = (props) => {
     }
 
     const onClick = () => {
+        const payload = {
+            username: _userName || props.username, 
+            password: password || props.password
+        }
+
         if(props.onLogInInfo === '1') {
-            console.log(_userName);
-            console.log(password);            
-            
-            const payload = {
-                username: _userName, 
-                password: password
-            }
-
-
             props.onPayloadCreation(payload)
-        } else {         
+        } else {   
+            console.log(payload);
             
-            const payload = {
-                username: '', 
-                password: ''
-            }
-
             props.onPayloadUser(payload)
         }
 
@@ -78,9 +70,6 @@ const UserSign = (props) => {
         setPassword('')
 
         // window.location.href = props.onDirectTo
-        // history.pushState({}, null,props.onDirectTo)
-        // window.history.pushState({}, null,props.onDirectTo)
-        // window.location.replace(props.onDirectTo)
     }
 
     return (

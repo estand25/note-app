@@ -4,44 +4,48 @@ import { UserSign } from '../components'
 import { UserConsumer } from '../hooks/UserContext'
 
 const UserSignOutInner = (props) => {
-    const handleSignOutUserWithId = async (_id) => {
-        const payload = {
-            username: '',
-            password: '',
-            email: ''
-        }
-        
-        props.updateAccount(payload)
+    const handleSignOutUserWithId = async (payload) => {
+        await api.SignOutUser(payload).then(res => {
+            if(res.data.success === true){
+                const updateUserStorage = {
+                    _id: '',
+                    username: '',
+                    password: '',
+                    email: ''
+                }
 
-        await api.getUserById(_id).then(res => {
-            console.log(res);
-            
-            window.alert('User Successfully Sign-out!!')
-        })
+                props.updateAccount(updateUserStorage)
+                window.alert('User Successfully Sign-out!!')
+            }
+        }).catch(err =>
+            console.log(err)
+        )
     }
 
-    return (
+    return (        
         <UserSign
+            {...props}
             title={'Sign Out'}
             btnAccept={'Sign Out'}
             onPayloadUser={handleSignOutUserWithId}
             onDirectTo={'/notes/list'}
             onCancelDirectTo={'/notes/about'}
             onLogInInfo={'0'}
+            onUserId={props._id}
         />
     )
 }
 
 const UserSignOut = props => (
     <UserConsumer>
-        {({username, password, email, _id, updateAccount}) => (
+        {({data, handleChange}) => (
             <UserSignOutInner
                 {...props}
-                username={username}
-                password={password}
-                email={email}
-                _id={_id}
-                updateAccount={updateAccount}
+                username={data.username}
+                password={data.password}
+                email={data.email}
+                _id={data._id}
+                updateAccount={handleChange}
             />
         )}
     </UserConsumer>

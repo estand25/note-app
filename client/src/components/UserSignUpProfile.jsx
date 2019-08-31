@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 
 const Title = styled.h1.attrs({
@@ -42,7 +42,8 @@ const UserSignUpProfile = (props) => {
     const [_username, setUserName] = useState(props.username)
     const [password, setPassword] = useState(props.password)
     const [email, setEmail] = useState(props.email)
-    const [_id, setId] = useState(props._id)
+    const _id = props._id
+
 
     const handleChangeInputUsername = async event => {
         setUserName(event.target.value)
@@ -58,9 +59,9 @@ const UserSignUpProfile = (props) => {
 
     const onClick = () => {
         const payload = {
-            username: _username,
-            password: password,
-            email: email
+            username: _username || props.username,
+            password: password || props.password,
+            email: email || props.email
         }
       
         if(props.onUserType === "0"){
@@ -68,7 +69,6 @@ const UserSignUpProfile = (props) => {
         }
         else {
             props.onPayloadUpdate(_id, payload)
-
         }
 
         setUserName('')
@@ -76,8 +76,6 @@ const UserSignUpProfile = (props) => {
         setEmail('')
 
         // window.location.href = props.onDirectTo
-        // history.pushState({}, null,props.onDirectTo)
-        // window.history.pushState({}, null,props.onDirectTo)
     }
 
     return (
