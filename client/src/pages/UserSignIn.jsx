@@ -5,21 +5,33 @@ import { UserConsumer } from '../hooks/UserContext'
 
 const UserSignInInner = (props) => {
     const handleCreateUser = async (payload) => {
-        console.log('UserSignIn');
-        console.log(payload);
+        // console.log('UserSignIn');
+        // console.log(payload);
         
         await api.SignInUser(payload).then(res => {
-            console.log(res);
+            // console.log(res.data);
+            // console.log(res.data.success);
+
+            if(res.data.success === true){
+                var user = res.data.data;
+                console.log(user);
+                
+                const updateUser = {
+                    username: user.username,
+                    password: user.password,
+                    _id: user._id,
+                    email: user.email
+                }
+
+                props.updateAccount(updateUser)
+            }
+            
             
             window.alert('User successfully Sign-In!!')
             
         }).catch(err => {
             window.alert(err.error)
         })
-
-        // debugger
-        
-        props.updateAccount(payload)
     }
 
     return (
@@ -27,7 +39,7 @@ const UserSignInInner = (props) => {
             title={'Sign-In'}
             btnAccept={'Sign-In'}
             onPayloadCreation={handleCreateUser}
-            onDirectTo={'/notes/list'}
+            onDirectTo={'/notes/about'}
             onCancelDirectTo={'/notes/about'}
             onLogInInfo={'1'}
         />
@@ -36,14 +48,14 @@ const UserSignInInner = (props) => {
 
 const UserSignIn = props => (
     <UserConsumer>
-        {({username, password, email, _id, updateAccount}) => (
+        {({data, handleChagne}) => (
             <UserSignInInner
                 {...props}
-                username={username}
-                password={password}
-                email={email}
-                _id={_id}
-                updateAccount={updateAccount}
+                username={data.username}
+                password={data.password}
+                email={data.email}
+                _id={data._id}
+                updateAccount={handleChagne}
             />
         )}    
     </UserConsumer>

@@ -5,6 +5,14 @@ import { UserConsumer } from '../hooks/UserContext'
 
 const UserSignOutInner = (props) => {
     const handleSignOutUserWithId = async (_id) => {
+        const payload = {
+            username: '',
+            password: '',
+            email: ''
+        }
+        
+        props.updateAccount(payload)
+
         await api.getUserById(_id).then(res => {
             console.log(res);
             

@@ -5,13 +5,13 @@ import apis from '../api';
 
 const UserProfileInner = (props) => {
     const handleUpdateUser = async (id, payload) => {
+        props.updateAccount(payload)
+        
         await apis.updateUserById(id, payload).then(res => {
             console.log(res);
             
             window.alert('User Information Updated Successfully !!')
         })
-
-        props.updateAccount(payload)
     } 
 
     return (

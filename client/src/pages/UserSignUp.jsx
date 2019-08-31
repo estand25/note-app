@@ -4,14 +4,15 @@ import {  UserSignUpProfile } from '../components'
 import { UserConsumer } from '../hooks/UserContext'
 
 const UserSignUpInner = (props) => {
+
     const handleCreateUser = async (payload) => {
+        props.updateAccount(payload)
+        
         await api.insertUser(payload).then(res => {
             console.log(res);
             
             window.alert('User created successfully !!')
         })
-
-        props.updateAccount(payload)
     }
 
     return (

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import ReactTable from 'react-table'
 import api from '../api'
+import { UserConsumer }  from '../hooks/UserContext'
 import { NoteDelete, NoteUpdate } from '../components'
 
 import styled from 'styled-components'
@@ -11,7 +12,7 @@ const Wrapper = styled.div`
     padding: 0 40px 40px 40px;
 `
 
-const NotesList = () => {
+const NotesListInner = (props) => {
     const [notes, setNotesState] = useState({})
     const [isLoading, setLoadingState] = useState(false)
 
@@ -20,10 +21,21 @@ const NotesList = () => {
             setLoadingState(true)
 
             api.getAllNote().then(notes => {
-                setNotesState(notes.data.data)
+                console.log(props._id);
+                var filterNotes = {}
+                if(props._id !== ""){
+                    filterNotes = notes.data.data.filter(i => i.user === props._id)
+                }
+                else {
+                    filterNotes = notes.data.data
+                }
+
+                console.log(filterNotes);
+                
+                setNotesState(filterNotes)
                 setLoadingState(false)
             })
-        },[]
+        },[props._id]
     )
     
     console.log('TCL: NotesList -> render -> notes', notes)
@@ -89,5 +101,20 @@ const NotesList = () => {
         </Wrapper>
     )
 }
+
+const NotesList = props => (
+    <UserConsumer>
+        {({data, handleChagne}) => (
+            <NotesListInner
+                {...props}
+                username={data.username}
+                password={data.password}
+                email={data.email}
+                _id={data._id}
+                updateAccount={handleChagne}
+            />
+        )}
+    </UserConsumer>
+)
 
 export default NotesList

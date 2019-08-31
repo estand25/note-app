@@ -3,34 +3,28 @@ import React from 'react'
 const UserContext = React.createContext()
 
 export const UserConsumer = UserContext.Consumer
-
-class UserProvider extends React.Component {
-    state = {
         // _id: '5d5ddd7f15045034ac158ec8',
         // username: 'd1',
         // password: 'd1pw',
         // email: 'd1@email.com',
+class UserProvider extends React.Component {
+    state = {
         _id: '',
         username: '',
         password: '',
         email: '',
-        updateAccount: updatedAccount => this.updateAccount(updatedAccount)
-      }
-      
-      updateAccount = updatedAccount => {
-        console.log(updatedAccount);
-        
-
-        this.setState(prevState => ({
-        ...prevState,
-         ...updatedAccount
-        }))
       }
 
+    updateAccount = payload => this.setState(payload)
 
     render () {
+        const context = {
+            data: this.state,
+            handleChagne: this.updateAccount
+        }
+        
         return (
-            <UserContext.Provider value={this.state}>
+            <UserContext.Provider value={context}>
                 {this.props.children}
             </UserContext.Provider>
         )

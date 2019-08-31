@@ -75,7 +75,9 @@ const UserSignUpProfile = (props) => {
         setPassword('')
         setEmail('')
 
-        window.location.href = props.onDirectTo
+        // window.location.href = props.onDirectTo
+        // history.pushState({}, null,props.onDirectTo)
+        // window.history.pushState({}, null,props.onDirectTo)
     }
 
     return (

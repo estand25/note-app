@@ -64,14 +64,23 @@ const UserSign = (props) => {
 
 
             props.onPayloadCreation(payload)
-        } else {
-            props.onPayloadUser('')
+        } else {         
+            
+            const payload = {
+                username: '', 
+                password: ''
+            }
+
+            props.onPayloadUser(payload)
         }
 
         setUserName('')
         setPassword('')
 
-        window.location.href = props.onDirectTo
+        // window.location.href = props.onDirectTo
+        // history.pushState({}, null,props.onDirectTo)
+        // window.history.pushState({}, null,props.onDirectTo)
+        // window.location.replace(props.onDirectTo)
     }
 
     return (

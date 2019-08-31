@@ -6,9 +6,9 @@ class Auth extends React.Component {
     render() {
         return (
             <UserConsumer>
-                {({ username }) => (
+                {({ data }) => (
                     <AuthInfo
-                        username={username}
+                        username={data.username}
                     />
                 )}
             </UserConsumer>
