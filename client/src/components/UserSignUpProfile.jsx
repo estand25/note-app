@@ -44,7 +44,6 @@ const UserSignUpProfile = (props) => {
     const [email, setEmail] = useState(props.email)
     const _id = props._id
 
-
     const handleChangeInputUsername = async event => {
         setUserName(event.target.value)
     }
@@ -75,7 +74,7 @@ const UserSignUpProfile = (props) => {
         setPassword('')
         setEmail('')
 
-        // window.location.href = props.onDirectTo
+        window.location.href = props.onDirectTo
     }
 
     return (

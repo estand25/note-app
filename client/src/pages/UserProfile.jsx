@@ -1,28 +1,11 @@
 import React from 'react'
-import {  UserSignUpProfile } from '../components'
+import { updateUser } from '../utilities'
+import { UserSignUpProfile } from '../components'
 import { UserConsumer } from '../hooks/UserContext'
-import apis from '../api';
 
 const UserProfileInner = (props) => {
     const handleUpdateUser = async (id, payload) => {
-        await apis.updateUserById(id, payload).then(res => {
-            if(res.data.success === true){
-                var user = res.data.data;                
-                const updateUserStorage = {
-                    _id: user._id,
-                    username: user.username,
-                    password: user.password,
-                    email: user.email
-                }
-
-                props.updateAccount(updateUserStorage)
-            
-                window.alert('User Information Updated Successfully !!')
-            }
-        }).catch(err => {
-            console.log(err);
-            window.alert(err.error)
-        })
+        await updateUser(id, props, payload)
     } 
 
     return (
@@ -39,7 +22,7 @@ const UserProfileInner = (props) => {
 
 const UserProfile = props => (
     <UserConsumer>
-        {({data, handleChange}) => (
+        {({ data, handleChange }) => (
             <UserProfileInner
                 {...props}
                 username={data.username}

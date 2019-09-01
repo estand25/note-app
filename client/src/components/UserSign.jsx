@@ -69,7 +69,7 @@ const UserSign = (props) => {
         setUserName('')
         setPassword('')
 
-        // window.location.href = props.onDirectTo
+        window.location.href = props.onDirectTo
     }
 
     return (

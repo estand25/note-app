@@ -1,25 +1,11 @@
 import React from 'react'
-import api from '../api'
+import { logOutUser } from '../utilities'
 import { UserSign } from '../components'
 import { UserConsumer } from '../hooks/UserContext'
 
 const UserSignOutInner = (props) => {
     const handleSignOutUserWithId = async (payload) => {
-        await api.SignOutUser(payload).then(res => {
-            if(res.data.success === true){
-                const updateUserStorage = {
-                    _id: '',
-                    username: '',
-                    password: '',
-                    email: ''
-                }
-
-                props.updateAccount(updateUserStorage)
-                window.alert('User Successfully Sign-out!!')
-            }
-        }).catch(err =>
-            console.log(err)
-        )
+        await logOutUser(payload, props)
     }
 
     return (        
@@ -31,14 +17,13 @@ const UserSignOutInner = (props) => {
             onDirectTo={'/notes/list'}
             onCancelDirectTo={'/notes/about'}
             onLogInInfo={'0'}
-            onUserId={props._id}
         />
     )
 }
 
 const UserSignOut = props => (
     <UserConsumer>
-        {({data, handleChange}) => (
+        {({ data, handleChange }) => (
             <UserSignOutInner
                 {...props}
                 username={data.username}

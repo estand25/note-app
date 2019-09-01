@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { UserConsumer } from '../hooks/UserContext'
-import ls from 'local-storage'
 
 const Auth = () => (
     <UserConsumer>
@@ -14,8 +13,6 @@ const Auth = () => (
 )
 
 const AuthInfo = (props) => {
-    console.log(ls.get('_id'));
-    
     if(props.username !== ''){
         return (
             <div>

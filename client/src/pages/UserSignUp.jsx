@@ -1,28 +1,11 @@
 import React from 'react'
-import api from '../api'
-import {  UserSignUpProfile } from '../components'
+import { createUser } from '../utilities'
+import { UserSignUpProfile } from '../components'
 import { UserConsumer } from '../hooks/UserContext'
 
 const UserSignUpInner = (props) => {
-
-    const handleCreateUser = async (payload) => {
-        await api.insertUser(payload).then(res => {
-            if(res.data.success === true){
-                var user = res.data.data;  
-
-                const updateUserStorage = {
-                    _id: user._id,
-                    username: user.username,
-                    password: user.password,
-                    email: user.email
-                }
-                
-                props.updateAccount(updateUserStorage)
-                window.alert('User created successfully !!')
-            }
-        }).catch(err => 
-            console.log(err)       
-        )
+    const handleCreateUser = async (payload) => {        
+        await createUser(payload, props)
     }
 
     return (

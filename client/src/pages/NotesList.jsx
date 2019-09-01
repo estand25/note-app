@@ -11,6 +11,11 @@ import 'react-table/react-table.css'
 const Wrapper = styled.div`
     padding: 0 40px 40px 40px;
 `
+const Label = styled.label`
+    margin: 5px;
+    font-size: 20px;
+    text-align: center;
+`
 
 const NotesListInner = (props) => {
     const [notes, setNotesState] = useState({})
@@ -27,10 +32,8 @@ const NotesListInner = (props) => {
                     filterNotes = notes.data.data.filter(i => i.user === props._id)
                 }
                 else {
-                    filterNotes = notes.data.data
+                    filterNotes = {}
                 }
-
-                console.log(filterNotes);
                 
                 setNotesState(filterNotes)
                 setLoadingState(false)
@@ -84,6 +87,13 @@ const NotesListInner = (props) => {
     
     if(!notes.length){
         showTable = false
+        if(showTable === false){
+            return (
+                <NoNotes
+                    value={'No Notes'}
+                />
+            )
+        }
     }
     
     return (
@@ -104,17 +114,25 @@ const NotesListInner = (props) => {
 
 const NotesList = props => (
     <UserConsumer>
-        {({data, handleChagne}) => (
+        {({ data, handleChange }) => (
             <NotesListInner
                 {...props}
                 username={data.username}
                 password={data.password}
                 email={data.email}
                 _id={data._id}
-                updateAccount={handleChagne}
+                updateAccount={handleChange}
             />
         )}
     </UserConsumer>
+)
+
+const NoNotes = (props) => (
+    <Wrapper>
+        <Label>
+            {props.value}
+        </Label>
+    </Wrapper>
 )
 
 export default NotesList
