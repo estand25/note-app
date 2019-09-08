@@ -35,11 +35,6 @@ const Links = () => {
                         </Link>
                     </Item>
                     <Item>
-                        <Link to="/" className="nav-link">
-                            Notes Management
-                        </Link>
-                    </Item>
-                    <Item>
                         <Link to="/notes/about" className="nav-link">
                             About
                         </Link>

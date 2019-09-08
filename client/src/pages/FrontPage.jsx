@@ -27,7 +27,6 @@ I plan on adding the following features to contiune the learning:
 - Will update the back-end to add a user schema - Done
 - Will update the back-end to add user routes/controllers - Done
 - Will update the front-end to persisnt User informaiton - Done
-- Will update the front-end to also have a note management page
 
 ## What you should install?
 
