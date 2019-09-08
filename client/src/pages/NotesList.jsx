@@ -11,10 +11,14 @@ import 'react-table/react-table.css'
 const Wrapper = styled.div`
     padding: 0 40px 40px 40px;
 `
+
+const Ewrapper = styled.div`
+    padding: 0 40px 40px 40px;
+    text-align: center;
+`
 const Label = styled.label`
     margin: 5px;
     font-size: 20px;
-    text-align: center;
 `
 
 const NotesListInner = (props) => {
@@ -128,11 +132,11 @@ const NotesList = props => (
 )
 
 const NoNotes = (props) => (
-    <Wrapper>
+    <Ewrapper>
         <Label>
             {props.value}
         </Label>
-    </Wrapper>
+    </Ewrapper>
 )
 
 export default NotesList

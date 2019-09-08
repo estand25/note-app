@@ -6,6 +6,7 @@ import UserProfile from './UserProfile'
 import UserSignIn from './UserSignIn'
 import UserSignOut from './UserSignOut'
 import UserSignUp from './UserSignUp'
+import FrontPage from './FrontPage'
 
 export {
     NotesList,
@@ -15,5 +16,6 @@ export {
     UserProfile,
     UserSignIn,
     UserSignOut,
-    UserSignUp
+    UserSignUp,
+    FrontPage
 }

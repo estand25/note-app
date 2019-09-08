@@ -18,7 +18,8 @@ import {
   UserProfile,
   UserSignIn,
   UserSignOut,
-  UserSignUp
+  UserSignUp,
+  FrontPage
 } from '../pages'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -31,7 +32,7 @@ const App = () => {
       <Router>
         <NavBar />
           <Switch>
-            <Route path="/" exact component={NoteAppAbout} />
+            <Route path="/" exact component={FrontPage} />
             <Route path="/notes/about" exact component={NoteAppAbout} />
             <Route path="/notes/list" exact component={NotesList} />
             <Route path="/notes/create" exact component={NotesInsert} />
