@@ -6,7 +6,7 @@
     "axios": "^0.21.2",
     "bootstrap": "^4.3.1",
     "local-storage": "^2.0.0",
-    "markdown-to-jsx": "^6.10.3",
+    "markdown-to-jsx": "^6.11.4",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-markdown": "^4.2.2",
